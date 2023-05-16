@@ -11,13 +11,26 @@ spec:
         autoscaling.knative.dev/minScale: "1"
         run.googleapis.com/cpu-throttling: "false"
         run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/container-dependencies: {"notes":["dd-agent"], "calender":["dd-agent"]}
     spec:
       containers:
         - image: gcr.io/datadoghq/agent:latest
+          name: dd-agent
           resources:
             limits:
               cpu: 200m
               memory: 256Mi
-        - image: ${REGISTRY}/notes:latest
+          env:
+          - name: DD_API_KEY
+            value: <DD_API_KEY>
+          - neme: DD_SITE
+            value: datadoghq.com
+          - name: DD_APM_ENABLED
+            value: true
+        - image: ${REGISTRY}/calender:latest
+          name: calender
           ports:
             - containerPort: 8080
+          env:
+          - name: DD_AGENT_HOST
+            value: datadog
