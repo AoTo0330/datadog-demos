@@ -26,8 +26,8 @@ steps:
       - PUSH_CONTAINER
 
 substitutions:
-  _REGISTRY: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/my-container
-  _IMAGE_NAME: ${_REGISTRY}/recursive:latest
+  _REGISTRY: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}
+  _IMAGE_NAME: ${_REGISTRY}/calendar:latest
 
 images:
   - ${_IMAGE_NAME}
