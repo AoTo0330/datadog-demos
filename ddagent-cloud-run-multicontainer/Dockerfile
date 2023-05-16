@@ -21,4 +21,4 @@ COPY /calendar /home/calendar
 RUN pip install -r requirements.txt
 
 # Run the application with Datadog
-CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
+CMD ["ddtrace-run", "python", "-m", "calendar.app"] 
