@@ -11,7 +11,7 @@ spec:
         autoscaling.knative.dev/minScale: "1"
         run.googleapis.com/cpu-throttling: "false"
         run.googleapis.com/execution-environment: gen2
-        run.googleapis.com/container-dependencies: {"notes":["dd-agent"], "calender":["dd-agent"]}
+        run.googleapis.com/container-dependencies: {"calendar":["dd-agent"]}
     spec:
       containers:
         - image: gcr.io/datadoghq/agent:latest
@@ -27,8 +27,8 @@ spec:
             value: datadoghq.com
           - name: DD_APM_ENABLED
             value: true
-        - image: ${REGISTRY}/calender:latest
-          name: calender
+        - image: ${REGISTRY}/calendar:latest
+          name: calendar
           ports:
             - containerPort: 8080
           env:
