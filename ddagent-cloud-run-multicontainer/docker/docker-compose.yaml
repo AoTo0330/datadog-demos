@@ -17,17 +17,6 @@ services:
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
 
-  calendar_app:
-    container_name: calendar
-    restart: always
-    build:
-      context: ../../..
-      dockerfile: docker/containers/solution/Dockerfile.calendar
-    ports:
-      - "9090:9090"
-    environment:
-      - DD_AGENT_HOST=datadog # Should reference the service name of the Datadog agent container in this docker-compose
-
   notes_app:
     container_name: notes
     restart: always
