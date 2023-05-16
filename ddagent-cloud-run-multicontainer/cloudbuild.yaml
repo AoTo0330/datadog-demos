@@ -5,32 +5,39 @@ steps:
     waitFor: ["-"]
 
   - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "${_IMAGE_DD}", "./d"]
+    id: BUILD_DD_CONTAINER
+    waitFor: ["-"]
+
+  - name: "gcr.io/cloud-builders/docker"
     args: ["push", "${_IMAGE_NAME}"]
     id: PUSH_CONTAINER
     waitFor:
       - BUILD_CONTAINER
-
+ 
+   - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "${_IMAGE_DD}"]
+    id: PUSH_DD_CONTAINER
+    waitFor:
+      - BUILD_DD_CONTAINER
+ 
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args:
-      [
-        "run",
-        "services",
-        "replace",
-        "multicontainers.yaml",
-        "--region",
-        "asia-northeast1",
-      ]
+      ["run", "services", "replace", "multicontainers.yaml", "--region", "asia-northeast1",]
     id: DEPLOY_CONTAINER
     waitFor:
       - PUSH_CONTAINER
+      - PUSH_DD_CONTAINER
 
 substitutions:
   _REGISTRY: asia-northeast1-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}
   _IMAGE_NAME: ${_REGISTRY}/calendar:latest
+  _IMAGE_DD: ${_REGISTRY}/dd-agent:latest
 
 images:
   - ${_IMAGE_NAME}
+  - ${_IMAGE_DD}
 
 options:
   dynamic_substitutions: true
