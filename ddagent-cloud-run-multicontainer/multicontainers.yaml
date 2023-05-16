@@ -1,0 +1,23 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    run.googleapis.com/launch-stage: BETA
+  name: datadog-sidecar-sample
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        run.googleapis.com/cpu-throttling: "false"
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      containers:
+        - image: gcr.io/datadoghq/agent:latest
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+        - image: ${REGISTRY}/notes:latest
+          ports:
+            - containerPort: 8080
