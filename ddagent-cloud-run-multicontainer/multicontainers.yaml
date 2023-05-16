@@ -20,13 +20,6 @@ spec:
             limits:
               cpu: 200m
               memory: 256Mi
-          env:
-          - name: DD_API_KEY
-            value: <DD_API_KEY>
-          - neme: DD_SITE
-            value: datadoghq.com
-          - name: DD_APM_ENABLED
-            value: true
         - image: ${REGISTRY}/calendar:latest
           name: calendar
           ports:
