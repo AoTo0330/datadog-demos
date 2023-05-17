@@ -14,7 +14,7 @@ spec:
         run.googleapis.com/container-dependencies: {"calendar":["dd-agent"]}
     spec:
       containers:
-        - image: gcr.io/datadoghq/agent:latest
+        - image: ${REGISTRY}/dd-agent:latest
           name: dd-agent
           resources:
             limits:
