@@ -11,7 +11,7 @@ spec:
         autoscaling.knative.dev/minScale: "1"
         run.googleapis.com/cpu-throttling: "false"
         run.googleapis.com/execution-environment: gen2
-        run.googleapis.com/container-dependencies: {"calendar":["dd-agent"]}
+        run.googleapis.com/container-dependencies: '{"calendar":["dd-agent"]}'
     spec:
       containers:
         - image: ${REGISTRY}/dd-agent:latest
