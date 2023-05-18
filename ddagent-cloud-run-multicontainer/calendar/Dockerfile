@@ -8,6 +8,8 @@ FROM python:3
 ENV DD_SERVICE="calendar"
 ENV DD_ENV="dev"
 ENV DD_VERSION="0.1.0"
+# ENV DD_TRACE_STARTUP_LOGS="true"
+# ENV DD_TRACE_DEBUG="true"
 
 LABEL com.datadoghq.tags.service="calendar"
 LABEL com.datadoghq.tags.env="dev"
