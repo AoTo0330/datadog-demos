@@ -16,10 +16,6 @@ spec:
       containers:
         - image: ${REGISTRY}/dd-agent:latest
           name: dd-agent
-          resources:
-            limits:
-              cpu: 200m
-              memory: 256Mi
         - image: ${REGISTRY}/calendar:latest
           name: calendar
           ports:
